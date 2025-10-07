@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition & Rivalry Project Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom styles for animations and aesthetics */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .checklist-item:hover .checklist-icon {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .checklist-item.completed p {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #818cf8, #d8b4fe);
+            transition: width 0.1s linear;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200 antialiased">
+
+    <!-- Animated Progress Tracker -->
+    <div class="progress-bar-container shadow-lg">
+        <div id="progressBar" class="progress-bar rounded-r-full"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 sm:py-24">
+
+        <!-- Header Section -->
+        <header class="text-center mb-16 fade-in-section">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 pb-3">
+                Competition & Rivalry
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mt-4">
+                A step-by-step guide to your yearly project. Follow the timeline, complete the tasks, and create something amazing.
+            </p>
+        </header>
+
+        <!-- Main Content - Project Steps -->
+        <main class="space-y-12">
+
+            <!-- Step 1 Card -->
+            <section id="step-1" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(129,140,248,0.5)]">
+                <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center text-xl font-bold shadow-lg">1</div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-indigo-300">First Check: Topic Selection</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-indigo-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            Your Task
+                        </h3>
+                        <ul class="space-y-3">
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-indigo-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Carefully read the project description and rubric.</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-indigo-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Brainstorm 2-3 potential rivalry topics that interest you.</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-indigo-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Prepare a list of questions about the project.</p>
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-indigo-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            Expectations
+                        </h3>
+                        <p class="text-slate-400">By the end of our meeting, you will have a final, approved rivalry topic and a clear understanding of the project's goals.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2 Card -->
+            <section id="step-2" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]">
+                 <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-xl font-bold shadow-lg">2</div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-purple-300">Second Check: Research & Draft Plan</h2>
+                </div>
+                
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                           Your Task
+                        </h3>
+                        <ul class="space-y-3">
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-purple-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Begin research using reliable sources.</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-purple-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Create a draft plan or outline for your case study.</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-purple-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Compile a list of your sources found so far.</p>
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            Expectations
+                        </h3>
+                        <p class="text-slate-400">We will review your plan and research to ensure you are on the right track and provide feedback to help focus your efforts.</p>
+                    </div>
+                </div>
+
+                <!-- Case Study Focus Areas -->
+                <div class="mt-8 pt-6 border-t border-slate-700/50">
+                    <h3 class="font-semibold text-lg text-slate-100 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        Case Study Focus Areas
+                    </h3>
+                    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-400">
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-purple-300">Background:</strong> Who were the competitors and what was the context of their competition?</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-purple-300">Key Events:</strong> Describe the major events, achievements, or conflicts that defined their rivalry.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-purple-300">Impact & Outcomes:</strong> Analyze the results. What new inventions, records, or ideas emerged?</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-purple-300">Quotes:</strong> Find statements and present them using both direct and reported speech.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Step 3 Card -->
+            <section id="step-3" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(236,72,153,0.5)]">
+                 <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center text-xl font-bold shadow-lg">3</div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-pink-300">Third Check: Rough Draft</h2>
+                </div>
+                
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-pink-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                           Your Task
+                        </h3>
+                        <ul class="space-y-3">
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-pink-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Write the full rough draft of your case study.</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-pink-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Integrate quotes using direct and reported speech.</p>
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-pink-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            Expectations
+                        </h3>
+                        <p class="text-slate-400">I will provide detailed feedback on your writing, focusing on clarity, analysis, and your use of evidence.</p>
+                    </div>
+                </div>
+
+                <!-- NEW: Draft Focus Areas -->
+                <div class="mt-8 pt-6 border-t border-slate-700/50">
+                    <h3 class="font-semibold text-lg text-slate-100 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-pink-400"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
+                        Draft Focus Areas
+                    </h3>
+                    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-400">
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-pink-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-pink-300">Complete Narrative:</strong> Your draft should tell the full story, incorporating all your research on the rivalry's background, key events, and impact.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-pink-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-pink-300">Evidence & Quotes:</strong> Ensure you have integrated your quotes correctly, using both direct and reported speech formats as required.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4 Card -->
+            <section id="step-4" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(251,146,60,0.5)]">
+                 <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-xl font-bold shadow-lg">4</div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-orange-300">Fourth Check: Final Report & Presentation Plan</h2>
+                </div>
+                
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-orange-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                           Your Task
+                        </h3>
+                        <ul class="space-y-3">
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-orange-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Revise and edit your rough draft into a final version.</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-orange-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Create a detailed plan or storyboard for your presentation.</p>
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-orange-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            Expectations
+                        </h3>
+                        <p class="text-slate-400">Your final written report is due. We will also finalize your presentation plan and set a date.</p>
+                    </div>
+                </div>
+
+                <!-- NEW: Presentation Plan Focus Areas -->
+                <div class="mt-8 pt-6 border-t border-slate-700/50">
+                    <h3 class="font-semibold text-lg text-slate-100 mb-4 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-orange-400"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="m15 10-4 4-2-2"></path></svg>
+                        Presentation Plan Focus Areas
+                    </h3>
+                    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-400">
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-orange-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-orange-300">Visual Support:</strong> Decide on your format (Sketch, PowerPoint, iMovie) and plan the key visuals, music, or effects you will use.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-orange-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <p><strong class="font-semibold text-orange-300">Structure & Timing:</strong> Outline the flow of your presentation, from introduction to conclusion, to fit the 10-15 minute timeframe.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Step 5 Card -->
+            <section id="step-5" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(34,197,94,0.5)]">
+                 <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-xl font-bold shadow-lg">5</div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-green-300">Fifth Check: Final Presentation</h2>
+                </div>
+                
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-green-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                           Your Task
+                        </h3>
+                        <ul class="space-y-3">
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-green-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Practice your presentation multiple times (10-15 mins).</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-green-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Finalize your visual aids (PowerPoint, iMovie, etc.).</p>
+                           </li>
+                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
+                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
+                                   <svg class="w-4 h-4 text-green-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                               </div>
+                               <p class="ml-4 text-slate-300">Deliver your awesome presentation to the class!</p>
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-green-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                            Expectations
+                        </h3>
+                        <p class="text-slate-400">A clear, confident, and engaging presentation that demonstrates your deep understanding of the topic, supported by your visual aid.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Rubric Card -->
+            <section id="rubric" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm">
+                <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 20h.01"></path><path d="M12 14h.01"></path><path d="M12 8h.01"></path><path d="M12 2h.01"></path><path d="M20 12h.01"></path><path d="M14 12h.01"></path><path d="M8 12h.01"></path><path d="M2 12h.01"></path><path d="M22 12h.01"></path><path d="M12 18V6"></path><path d="M18 12H6"></path></svg>
+                    </div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-amber-300">Detailed Grading Rubric</h2>
+                </div>
+                
+                <!-- Report Section -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-slate-100 mb-4 border-b-2 border-amber-400/50 pb-2">Report Evaluation (50 Points)</h3>
+                    <div class="space-y-4">
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Cover / Table of Contents</h4>
+                                <span class="font-bold text-lg text-amber-300">2 Points</span>
+                            </div>
+                            <div class="mt-4 grid md:grid-cols-3 gap-4 text-sm">
+                                <div class="bg-green-600/20 border border-green-500/30 p-3 rounded-lg"><p><strong class="font-semibold text-green-300">2P:</strong> Included and clearly stated.</p></div>
+                                <div class="bg-yellow-600/20 border border-yellow-500/30 p-3 rounded-lg"><p><strong class="font-semibold text-yellow-300">1P:</strong> Included but not clearly stated.</p></div>
+                                <div class="bg-red-600/20 border border-red-500/30 p-3 rounded-lg"><p><strong class="font-semibold text-red-300">0P:</strong> Not included.</p></div>
+                            </div>
+                        </div>
+                         <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Organization (Summary, Intro, Conclusion, Subheadings)</h4>
+                                <span class="font-bold text-lg text-amber-300">12 Points</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">A well-structured report with clear sections is essential.</p>
+                        </div>
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Content / Development (Explanation & Visuals)</h4>
+                                <span class="font-bold text-lg text-amber-300">22 Points</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Content should be detailed, well-explained, and supported with visuals.</p>
+                        </div>
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Language and Expression</h4>
+                                <span class="font-bold text-lg text-amber-300">8 Points</span>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">Advanced vocabulary and correct grammar are expected.</p>
+                        </div>
+                         <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Use of Sources (Count, Reliability, Format, Citations)</h4>
+                                <span class="font-bold text-lg text-amber-300">8 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">Proper use and citation of multiple reliable sources (APA/MLA).</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Presentation Section -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-slate-100 mb-4 border-b-2 border-amber-400/50 pb-2">Presentation Evaluation (25 Points)</h3>
+                     <div class="space-y-4">
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                            <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Planning, Order, and Conclusion</h4>
+                                <span class="font-bold text-lg text-amber-300">5 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">A well-structured presentation with a logical flow and strong summary.</p>
+                        </div>
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Content Knowledge & Details</h4>
+                                <span class="font-bold text-lg text-amber-300">4 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">Demonstrates a satisfying level of knowledge with details and explanations.</p>
+                        </div>
+                         <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Audience Communication & Engagement</h4>
+                                <span class="font-bold text-lg text-amber-300">4 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">Fluent speech, effective body language, and active audience participation.</p>
+                        </div>
+                         <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Visual Impact & Use of Technology/Sources</h4>
+                                <span class="font-bold text-lg text-amber-300">8 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">Original, impressive ideas supported by effective visuals and technology.</p>
+                        </div>
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Time Management & Expression Skills</h4>
+                                <span class="font-bold text-lg text-amber-300">4 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">Effective use of the allotted time with clear and engaging language.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Section -->
+                <div>
+                    <h3 class="text-xl font-bold text-slate-100 mb-4 border-b-2 border-amber-400/50 pb-2">Product Evaluation (25 Points)</h3>
+                     <div class="space-y-4">
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Relevance to Content</h4>
+                                <span class="font-bold text-lg text-amber-300">8 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">The product is fully compatible with and supportive of the project's content.</p>
+                        </div>
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Creativity and Originality</h4>
+                                <span class="font-bold text-lg text-amber-300">8 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">The product is unique and creative, with distinct features.</p>
+                        </div>
+                        <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Design, Layout & Interdisciplinary Work</h4>
+                                <span class="font-bold text-lg text-amber-300">6 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">The product is well-designed and shows support from other disciplines.</p>
+                        </div>
+                         <!-- Rubric Item -->
+                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                             <div class="flex flex-wrap justify-between items-center gap-2">
+                                <h4 class="font-semibold text-slate-100">Applicability / Wider Impact</h4>
+                                <span class="font-bold text-lg text-amber-300">3 Points</span>
+                            </div>
+                             <p class="text-xs text-slate-400 mt-1">The product offers a creative and applicable solution to a problem.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rules & Grading Card -->
+            <section id="rules" class="fade-in-section p-8 bg-slate-800 rounded-2xl shadow-lg border border-slate-700">
+                <div class="flex items-center mb-6">
+                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><gavel class="lucide lucide-gavel"></gavel><path d="m14 12-8.5 8.5"></path><path d="m17.5 15.5 2.5 2.5"></path><path d="m12 15 6 6"></path></svg>
+                    </div>
+                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-teal-300">Project Rules & Grading</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 text-slate-400">
+                    <div>
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3">General Rules</h3>
+                        <ul class="space-y-3 list-disc list-inside">
+                            <li>No plagiarism! You must reference all sources.</li>
+                            <li>Stick to the check days and the deadline (5 check-ins required).</li>
+                            <li>Be ready to present your work orally in class.</li>
+                            <li>All work must be your own product without outside help.</li>
+                            <li>Papers must be presentable, tidy, and well-written (Calibri, 11pt if typed). Submit in a file with your name, number, and class.</li>
+                            <li>Presentations may be supported by a sketch, PowerPoint, or iMovie.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                        <h3 class="font-semibold text-lg text-slate-100 mb-3">Grading Breakdown</h3>
+                        <ul class="space-y-3 list-disc list-inside">
+                           <li><span class="font-semibold text-teal-300">Report:</span> 50%</li>
+                           <li><span class="font-semibold text-teal-300">Product:</span> 25%</li>
+                           <li><span class="font-semibold text-teal-300">Presentation:</span> 25%</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // --- INTERACTIVE CHECKLISTS ---
+        function toggleCheckbox(element) {
+            element.classList.toggle('completed');
+            const icon = element.querySelector('.checklist-icon');
+            const checkmark = element.querySelector('svg');
+            
+            if (element.classList.contains('completed')) {
+                icon.classList.remove('border-slate-500', 'bg-slate-700');
+                icon.classList.add('border-transparent', 'bg-current');
+                checkmark.style.opacity = '1';
+            } else {
+                icon.classList.add('border-slate-500', 'bg-slate-700');
+                icon.classList.remove('border-transparent', 'bg-current');
+                checkmark.style.opacity = '0';
+            }
+        }
+
+        // --- SCROLL-BASED FADE-IN ANIMATIONS ---
+        const sections = document.querySelectorAll('.fade-in-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // --- SCROLL PROGRESS BAR ---
+        const progressBar = document.getElementById('progressBar');
+        
+        function updateProgressBar() {
+            const { scrollTop, scrollHeight } = document.documentElement;
+            const scrollPercent = (scrollTop / (scrollHeight - window.innerHeight)) * 100 + '%';
+            progressBar.style.width = scrollPercent;
+        }
+
+        document.addEventListener('scroll', updateProgressBar);
+    </script>
+</body>
+</html>
+
+
