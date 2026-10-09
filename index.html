@@ -1,572 +1,1031 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Competition & Rivalry Project Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom styles for animations and aesthetics */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .checklist-item:hover .checklist-icon {
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-        }
-        .checklist-item.completed p {
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-        .progress-bar-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            z-index: 50;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #818cf8, #d8b4fe);
-            transition: width 0.1s linear;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Famous Rivalries — Project Guide & Progress Checks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #5b21b6;
+      --primary-light: #7c3aed;
+      --primary-subtle: #ede9fe;
+      --secondary: #0d6efd;
+      --accent: #d97706;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.6;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #2e1065 0%, #5b21b6 50%, #7c3aed 100%);
+      color: #ffffff;
+      padding: 56px 24px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: radial-gradient(circle at 85% 20%, rgba(255,255,255,0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .header-desc {
+      font-size: 1.125rem;
+      max-width: 780px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 28px;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      color: #fff;
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+    }
+
+    /* Quick Specs Grid */
+    .specs-section {
+      margin-top: -36px;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 50px;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 20px;
+    }
+
+    .spec-box {
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .spec-box h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .spec-box ul {
+      list-style: none;
+    }
+
+    .spec-box li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+      color: var(--slate-700);
+    }
+
+    .spec-box li::before {
+      content: "•";
+      color: var(--primary-light);
+      position: absolute;
+      left: 4px;
+      font-weight: bold;
+    }
+
+    /* Speculative Grammar Callout */
+    .grammar-callout {
+      background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 48px;
+    }
+
+    .grammar-callout h3 {
+      color: #1e40af;
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .grammar-callout p {
+      color: #1e3a8a;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .grammar-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      background: #ffffff;
+      border: 1px solid #93c5fd;
+      color: #1e40af;
+      font-family: monospace;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .section-title-wrap {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .section-subtitle {
+      color: var(--slate-600);
+      font-size: 1rem;
+      margin-top: 6px;
+    }
+
+    /* Timeline Navigation */
+    .timeline-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .timeline-btn {
+      flex: 0 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timeline-btn:hover {
+      background: var(--slate-100);
+      color: var(--dark);
+    }
+
+    .timeline-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(15, 81, 50, 0.25);
+    }
+
+    .timeline-btn .pill-week {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 999px;
+    }
+
+    .timeline-btn.active .pill-week {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Checkpoint Card */
+    .checkpoint-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .checkpoint-header {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .checkpoint-title-grp h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.45rem;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .meeting-badge {
+      background: var(--primary-subtle);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .checkpoint-header p {
+      color: var(--slate-600);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .questions-box {
+      margin: 24px 32px 10px;
+      background: #fefce8;
+      border: 1px solid #fef08a;
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+    }
+
+    .questions-box h4 {
+      color: #854d0e;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .questions-box ul {
+      margin-left: 20px;
+      color: #713f12;
+      font-size: 0.92rem;
+    }
+
+    .questions-box li {
+      margin-bottom: 4px;
+    }
+
+    /* 3-Column Action Workflow */
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+      padding: 24px 32px 32px;
+    }
+
+    .action-col {
+      border-radius: var(--radius-md);
+      padding: 22px;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col-before {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .col-during {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .col-next {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .col-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .col-before .col-title { color: var(--slate-800); }
+    .col-during .col-title { color: #166534; }
+    .col-next .col-title { color: #1e40af; }
+
+    .action-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-grow: 1;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--slate-700);
+    }
+
+    .action-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--slate-300);
+      border-radius: 4px;
+
+      cursor: pointer;
+      margin-top: 2px;
+      position: relative;
+      flex-shrink: 0;
+      background: #ffffff;
+      transition: all 0.15s ease;
+    }
+
+    .action-item input[type="checkbox"]:checked {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .action-item input[type="checkbox"]:checked::after {
+      content: "✔";
+      font-size: 11px;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .action-item input[type="checkbox"]:checked + label {
+      text-decoration: line-through;
+      color: var(--slate-600);
+      opacity: 0.8;
+    }
+
+    /* Print & Action Controls */
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--slate-200);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border: 1px solid var(--slate-300);
+      color: var(--slate-700);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--slate-100);
+    }
+
+    .progress-track {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--slate-600);
+    }
+
+    .progress-bar-bg {
+      width: 160px;
+      height: 8px;
+      background: var(--slate-200);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary-light);
+      transition: width 0.3s ease;
+    }
+
+    input[type="checkbox"]:focus-visible, button:focus-visible {
+      outline: 3px solid var(--secondary);
+      outline-offset: 3px;
+    }
+    .action-item label { cursor: pointer; }
+    @media print {
+      header { padding: 20px; color: #000; background: #fff; }
+      .header-desc, .stat-card { color: #000; }
+      .timeline-nav, .action-bar { display: none; }
+      .specs-section { margin-top: 20px; }
+      .workflow-grid { display: block; }
+      .action-col { margin-bottom: 12px; break-inside: avoid; }
+      .checkpoint-card { box-shadow: none; }
+    }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--slate-200); vertical-align: top; }
+    th { background: var(--slate-100); }
+    @media (max-width: 480px) {
+      .specs-grid { grid-template-columns: 1fr; }
+      .workflow-grid { grid-template-columns: 1fr; }
+      .checkpoint-title-grp h2 { flex-wrap: wrap; }
+      .col-title { flex-wrap: wrap; gap: 8px; }
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .checkpoint-header {
+        padding: 20px;
+      }
+      .questions-box {
+        margin: 16px 20px 0;
+      }
+      .workflow-grid {
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
-<body class="bg-slate-900 text-slate-200 antialiased">
+<body>
 
-    <!-- Animated Progress Tracker -->
-    <div class="progress-bar-container shadow-lg">
-        <div id="progressBar" class="progress-bar rounded-r-full"></div>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="badge-tag">English Project • Competition and Rivalry</div>
+      <h1>Famous Rivalries: A Case Study on Competition</h1>
+      <p class="header-desc">
+        Can competition bring out the best in people—and also cause problems? Choose one famous rivalry. Research what happened, explain its effects, and share what we can learn from it. A case study is a detailed look at one real example.
+      </p>
+
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="label">What You Will Make</div>
+          <div class="value">Report 50% • Product 25% • Talk 25%</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Your Research Focus</div>
+          <div class="value">One Famous Rivalry</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Presentation</div>
+          <div class="value">10 – 15 Minutes</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Project Checks</div>
+          <div class="value">5 Progress Checks</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- SPECS & RULES -->
+    <section class="specs-section">
+      <div class="specs-grid">
+        <div class="spec-box">
+          <h3>📌 What to Hand In</h3>
+          <ul>
+            <li><strong>Report — 50%:</strong> Explain the background, key events, and effects of one rivalry. Include real statements using direct and reported speech, and a source list.</li>
+            <li><strong>Visual product — 25%:</strong> Make an illustrated sketch or poster, a slide presentation, or a short video to help explain your findings.</li>
+            <li><strong>Presentation — 25%:</strong> Give a 5–10 minute talk using your visual product. Be ready to answer questions.</li>
+            <li><strong>Your own work:</strong> Write in your own words. Name the sources of facts, pictures, and quotations you use.</li>
+          </ul>
+        </div>
+        <div class="spec-box">
+          <h3>🔎 Choose One Rivalry</h3>
+          <ul>
+            <li><strong>Technology:</strong> Thomas Edison and Nikola Tesla; Apple and Microsoft.</li>
+            <li><strong>Sport:</strong> Muhammad Ali and Joe Frazier; Lionel Messi and Cristiano Ronaldo.</li>
+            <li><strong>Business:</strong> Coca-Cola and Pepsi.</li>
+            <li><strong>Comics and entertainment:</strong> Marvel and DC Comics.</li>
+            <li>You may suggest another famous rivalry. Choose one with enough reliable information about both sides.</li>
+          </ul>
+        </div>
+        <div class="spec-box">
+          <h3>🎯 What Your Research Must Explain</h3>
+          <ul>
+            <li><strong>Background:</strong> Who are the rivals? When and where did they compete? What were they trying to achieve?</li>
+            <li><strong>Key events:</strong> What important events, achievements, or conflicts shaped the rivalry?</li>
+            <li><strong>Effects:</strong> What improved? What problems or pressure did the rivalry create? Explain the effects on the rivals and their field.</li>
+            <li><strong>Statements:</strong> What did the rivals say about each other or the competition? Show their words and report their meaning.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="grammar-callout">
+      <h3>💬 Useful Language: Direct and Reported Speech</h3>
+      <p><strong>Direct speech</strong> gives someone's exact words in quotation marks. <strong>Reported speech</strong> tells us what they said without repeating the exact words.</p>
+      <p><strong>Practice example — invented, not a real rival's quotation:</strong><br>
+      Direct: The player said, “Competition makes me work harder.”<br>
+      Reported: The player said that competition made them work harder.</p>
+      <div class="grammar-pills">
+        <span class="pill">X said that...</span>
+        <span class="pill">X told an interviewer that...</span>
+        <span class="pill">This suggests that...</span>
+        <span class="pill">As a result,...</span>
+        <span class="pill">However,...</span>
+      </div>
+      <p style="margin-top:16px"><strong>Check the changes:</strong> Pronouns change to fit the speaker. After “said”, present verbs often change to past verbs: “makes” → “made”. Use <em>said that</em> or <em>told someone that</em>. A tense may stay the same if the information is still true.</p>
+      <p><strong>For your project:</strong> Find real statements about the rivalry, ideally from both sides. Save the speaker, date, and source. Include direct and reported speech. If a quotation cannot be checked, choose another one. Never turn a summary into a quotation.</p>
+    </section>
+
+    <section class="spec-box" style="margin-bottom:32px">
+      <h3>🧭 A Clear Report Plan</h3>
+      <p>Cover and contents → Short summary → Introduction → Background → Key events → Positive and negative effects → Statements and reported speech → Conclusion → Source list.</p>
+      <p style="margin-top:12px"><strong>Go beyond a list of facts:</strong> Explain why an event matters. Use this pattern: <em>What happened? → What changed? → How does this support your point?</em></p>
+      <p style="margin-top:12px"><strong>Useful questions:</strong> Did the rivalry lead to better ideas or performances? Did it cause stress, unfair behaviour, or conflict? Was it mainly a personal rivalry, a business competition, or a story created by fans and the media? Support your answer with evidence from both sides.</p>
+      <p style="margin-top:12px"><strong>Research tip:</strong> Start with 3–4 reliable sources as a useful target, then add more if needed. Use sources such as original interviews, official records, books, and well-known news reports. Record the title, author or organisation, date, and link for each source.</p>
+    </section>
+
+    <!-- SECTION TITLE -->
+    <div class="section-title-wrap">
+      <h2 class="section-title">Your Project, Step by Step</h2>
+      <p class="section-subtitle">Use the five checks to build your project. The tabs show the meeting weeks. Confirm exact meeting dates with your teacher. Final hand-in: 30 April (Week 29). Tick a task only when it is finished.</p>
     </div>
 
-    <div class="container mx-auto px-4 py-16 sm:py-24">
-
-        <!-- Header Section -->
-        <header class="text-center mb-16 fade-in-section">
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 pb-3">
-                Competition & Rivalry
-            </h1>
-            <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mt-4">
-                A step-by-step guide to your yearly project. Follow the timeline, complete the tasks, and create something amazing.
-            </p>
-        </header>
-
-        <!-- Main Content - Project Steps -->
-        <main class="space-y-12">
-
-            <!-- Step 1 Card -->
-            <section id="step-1" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(129,140,248,0.5)]">
-                <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center text-xl font-bold shadow-lg">1</div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-indigo-300">First Check: Topic Selection</h2>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-indigo-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                            Your Task
-                        </h3>
-                        <ul class="space-y-3">
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-indigo-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Carefully read the project description and rubric.</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-indigo-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Brainstorm 2-3 potential rivalry topics that interest you.</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-indigo-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Prepare a list of questions about the project.</p>
-                           </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-indigo-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            Expectations
-                        </h3>
-                        <p class="text-slate-400">By the end of our meeting, you will have a final, approved rivalry topic and a clear understanding of the project's goals.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 2 Card -->
-            <section id="step-2" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]">
-                 <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-xl font-bold shadow-lg">2</div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-purple-300">Second Check: Research & Draft Plan</h2>
-                </div>
-                
-                 <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                           Your Task
-                        </h3>
-                        <ul class="space-y-3">
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-purple-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Begin research using reliable sources.</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-purple-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Create a draft plan or outline for your case study.</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-purple-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Compile a list of your sources found so far.</p>
-                           </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            Expectations
-                        </h3>
-                        <p class="text-slate-400">We will review your plan and research to ensure you are on the right track and provide feedback to help focus your efforts.</p>
-                    </div>
-                </div>
-
-                <!-- Case Study Focus Areas -->
-                <div class="mt-8 pt-6 border-t border-slate-700/50">
-                    <h3 class="font-semibold text-lg text-slate-100 mb-4 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-purple-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                        Case Study Focus Areas
-                    </h3>
-                    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-400">
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-purple-300">Background:</strong> Who were the competitors and what was the context of their competition?</p>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-purple-300">Key Events:</strong> Describe the major events, achievements, or conflicts that defined their rivalry.</p>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-purple-300">Impact & Outcomes:</strong> Analyze the results. What new inventions, records, or ideas emerged?</p>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-purple-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-purple-300">Quotes:</strong> Find statements and present them using both direct and reported speech.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Step 3 Card -->
-            <section id="step-3" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(236,72,153,0.5)]">
-                 <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center text-xl font-bold shadow-lg">3</div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-pink-300">Third Check: Rough Draft</h2>
-                </div>
-                
-                 <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-pink-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                           Your Task
-                        </h3>
-                        <ul class="space-y-3">
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-pink-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Write the full rough draft of your case study.</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-pink-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Integrate quotes using direct and reported speech.</p>
-                           </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-pink-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            Expectations
-                        </h3>
-                        <p class="text-slate-400">I will provide detailed feedback on your writing, focusing on clarity, analysis, and your use of evidence.</p>
-                    </div>
-                </div>
-
-                <!-- NEW: Draft Focus Areas -->
-                <div class="mt-8 pt-6 border-t border-slate-700/50">
-                    <h3 class="font-semibold text-lg text-slate-100 mb-4 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-pink-400"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
-                        Draft Focus Areas
-                    </h3>
-                    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-400">
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-pink-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-pink-300">Complete Narrative:</strong> Your draft should tell the full story, incorporating all your research on the rivalry's background, key events, and impact.</p>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-pink-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-pink-300">Evidence & Quotes:</strong> Ensure you have integrated your quotes correctly, using both direct and reported speech formats as required.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Step 4 Card -->
-            <section id="step-4" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(251,146,60,0.5)]">
-                 <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-xl font-bold shadow-lg">4</div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-orange-300">Fourth Check: Final Report & Presentation Plan</h2>
-                </div>
-                
-                 <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-orange-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                           Your Task
-                        </h3>
-                        <ul class="space-y-3">
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-orange-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Revise and edit your rough draft into a final version.</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-orange-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Create a detailed plan or storyboard for your presentation.</p>
-                           </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-orange-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            Expectations
-                        </h3>
-                        <p class="text-slate-400">Your final written report is due. We will also finalize your presentation plan and set a date.</p>
-                    </div>
-                </div>
-
-                <!-- NEW: Presentation Plan Focus Areas -->
-                <div class="mt-8 pt-6 border-t border-slate-700/50">
-                    <h3 class="font-semibold text-lg text-slate-100 mb-4 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-orange-400"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="m15 10-4 4-2-2"></path></svg>
-                        Presentation Plan Focus Areas
-                    </h3>
-                    <div class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-slate-400">
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-orange-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-orange-300">Visual Support:</strong> Decide on your format (Sketch, PowerPoint, iMovie) and plan the key visuals, music, or effects you will use.</p>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 text-orange-400"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                            <p><strong class="font-semibold text-orange-300">Structure & Timing:</strong> Outline the flow of your presentation, from introduction to conclusion, to fit the 10-15 minute timeframe.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Step 5 Card -->
-            <section id="step-5" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(34,197,94,0.5)]">
-                 <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-xl font-bold shadow-lg">5</div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-green-300">Fifth Check: Final Presentation</h2>
-                </div>
-                
-                 <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-green-400"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                           Your Task
-                        </h3>
-                        <ul class="space-y-3">
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-green-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Practice your presentation multiple times (10-15 mins).</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-green-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Finalize your visual aids (PowerPoint, iMovie, etc.).</p>
-                           </li>
-                           <li class="checklist-item flex items-start cursor-pointer group" onclick="toggleCheckbox(this)">
-                               <div class="checklist-icon mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 border-slate-500 bg-slate-700 flex items-center justify-center transition-all duration-300">
-                                   <svg class="w-4 h-4 text-green-300 opacity-0 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                               </div>
-                               <p class="ml-4 text-slate-300">Deliver your awesome presentation to the class!</p>
-                           </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-green-400"><path d="m9 11 3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-                            Expectations
-                        </h3>
-                        <p class="text-slate-400">A clear, confident, and engaging presentation that demonstrates your deep understanding of the topic, supported by your visual aid.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Detailed Rubric Card -->
-            <section id="rubric" class="fade-in-section p-8 bg-slate-800/50 rounded-2xl shadow-2xl border border-slate-700 backdrop-blur-sm">
-                <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M12 20h.01"></path><path d="M12 14h.01"></path><path d="M12 8h.01"></path><path d="M12 2h.01"></path><path d="M20 12h.01"></path><path d="M14 12h.01"></path><path d="M8 12h.01"></path><path d="M2 12h.01"></path><path d="M22 12h.01"></path><path d="M12 18V6"></path><path d="M18 12H6"></path></svg>
-                    </div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-amber-300">Detailed Grading Rubric</h2>
-                </div>
-                
-                <!-- Report Section -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-slate-100 mb-4 border-b-2 border-amber-400/50 pb-2">Report Evaluation (50 Points)</h3>
-                    <div class="space-y-4">
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                            <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Cover / Table of Contents</h4>
-                                <span class="font-bold text-lg text-amber-300">2 Points</span>
-                            </div>
-                            <div class="mt-4 grid md:grid-cols-3 gap-4 text-sm">
-                                <div class="bg-green-600/20 border border-green-500/30 p-3 rounded-lg"><p><strong class="font-semibold text-green-300">2P:</strong> Included and clearly stated.</p></div>
-                                <div class="bg-yellow-600/20 border border-yellow-500/30 p-3 rounded-lg"><p><strong class="font-semibold text-yellow-300">1P:</strong> Included but not clearly stated.</p></div>
-                                <div class="bg-red-600/20 border border-red-500/30 p-3 rounded-lg"><p><strong class="font-semibold text-red-300">0P:</strong> Not included.</p></div>
-                            </div>
-                        </div>
-                         <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                            <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Organization (Summary, Intro, Conclusion, Subheadings)</h4>
-                                <span class="font-bold text-lg text-amber-300">12 Points</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">A well-structured report with clear sections is essential.</p>
-                        </div>
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                            <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Content / Development (Explanation & Visuals)</h4>
-                                <span class="font-bold text-lg text-amber-300">22 Points</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">Content should be detailed, well-explained, and supported with visuals.</p>
-                        </div>
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                            <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Language and Expression</h4>
-                                <span class="font-bold text-lg text-amber-300">8 Points</span>
-                            </div>
-                            <p class="text-xs text-slate-400 mt-1">Advanced vocabulary and correct grammar are expected.</p>
-                        </div>
-                         <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                            <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Use of Sources (Count, Reliability, Format, Citations)</h4>
-                                <span class="font-bold text-lg text-amber-300">8 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">Proper use and citation of multiple reliable sources (APA/MLA).</p>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Presentation Section -->
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-slate-100 mb-4 border-b-2 border-amber-400/50 pb-2">Presentation Evaluation (25 Points)</h3>
-                     <div class="space-y-4">
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                            <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Planning, Order, and Conclusion</h4>
-                                <span class="font-bold text-lg text-amber-300">5 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">A well-structured presentation with a logical flow and strong summary.</p>
-                        </div>
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Content Knowledge & Details</h4>
-                                <span class="font-bold text-lg text-amber-300">4 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">Demonstrates a satisfying level of knowledge with details and explanations.</p>
-                        </div>
-                         <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Audience Communication & Engagement</h4>
-                                <span class="font-bold text-lg text-amber-300">4 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">Fluent speech, effective body language, and active audience participation.</p>
-                        </div>
-                         <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Visual Impact & Use of Technology/Sources</h4>
-                                <span class="font-bold text-lg text-amber-300">8 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">Original, impressive ideas supported by effective visuals and technology.</p>
-                        </div>
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Time Management & Expression Skills</h4>
-                                <span class="font-bold text-lg text-amber-300">4 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">Effective use of the allotted time with clear and engaging language.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product Section -->
-                <div>
-                    <h3 class="text-xl font-bold text-slate-100 mb-4 border-b-2 border-amber-400/50 pb-2">Product Evaluation (25 Points)</h3>
-                     <div class="space-y-4">
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Relevance to Content</h4>
-                                <span class="font-bold text-lg text-amber-300">8 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">The product is fully compatible with and supportive of the project's content.</p>
-                        </div>
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Creativity and Originality</h4>
-                                <span class="font-bold text-lg text-amber-300">8 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">The product is unique and creative, with distinct features.</p>
-                        </div>
-                        <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Design, Layout & Interdisciplinary Work</h4>
-                                <span class="font-bold text-lg text-amber-300">6 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">The product is well-designed and shows support from other disciplines.</p>
-                        </div>
-                         <!-- Rubric Item -->
-                        <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                             <div class="flex flex-wrap justify-between items-center gap-2">
-                                <h4 class="font-semibold text-slate-100">Applicability / Wider Impact</h4>
-                                <span class="font-bold text-lg text-amber-300">3 Points</span>
-                            </div>
-                             <p class="text-xs text-slate-400 mt-1">The product offers a creative and applicable solution to a problem.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Rules & Grading Card -->
-            <section id="rules" class="fade-in-section p-8 bg-slate-800 rounded-2xl shadow-lg border border-slate-700">
-                <div class="flex items-center mb-6">
-                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500 flex items-center justify-center shadow-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><gavel class="lucide lucide-gavel"></gavel><path d="m14 12-8.5 8.5"></path><path d="m17.5 15.5 2.5 2.5"></path><path d="m12 15 6 6"></path></svg>
-                    </div>
-                    <h2 class="ml-4 text-2xl sm:text-3xl font-bold text-teal-300">Project Rules & Grading</h2>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 text-slate-400">
-                    <div>
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3">General Rules</h3>
-                        <ul class="space-y-3 list-disc list-inside">
-                            <li>No plagiarism! You must reference all sources.</li>
-                            <li>Stick to the check days and the deadline (5 check-ins required).</li>
-                            <li>Be ready to present your work orally in class.</li>
-                            <li>All work must be your own product without outside help.</li>
-                            <li>Papers must be presentable, tidy, and well-written (Calibri, 11pt if typed). Submit in a file with your name, number, and class.</li>
-                            <li>Presentations may be supported by a sketch, PowerPoint, or iMovie.</li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-                        <h3 class="font-semibold text-lg text-slate-100 mb-3">Grading Breakdown</h3>
-                        <ul class="space-y-3 list-disc list-inside">
-                           <li><span class="font-semibold text-teal-300">Report:</span> 50%</li>
-                           <li><span class="font-semibold text-teal-300">Product:</span> 25%</li>
-                           <li><span class="font-semibold text-teal-300">Presentation:</span> 25%</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-        </main>
+    <!-- TIMELINE NAV -->
+    <div class="timeline-nav" id="timelineNav">
+      <button class="timeline-btn active" onclick="switchWeek(5)"><span class="pill-week">Week 5</span> Check 1: Choose a Rivalry</button>
+      <button class="timeline-btn" onclick="switchWeek(7)"><span class="pill-week">Week 7</span> Check 2: Research</button>
+      <button class="timeline-btn" onclick="switchWeek(11)"><span class="pill-week">Week 11</span> Check 3: Make a Plan</button>
+      <button class="timeline-btn" onclick="switchWeek(18)"><span class="pill-week">Week 18</span> Check 4: First Draft</button>
+      <button class="timeline-btn" onclick="switchWeek(23)"><span class="pill-week">Week 23</span> Check 5: Improve Your Draft</button>
+      <button class="timeline-btn" onclick="switchWeek(29)"><span class="pill-week">Week 29 • 30 April</span> Final Hand-in</button>
+      <button class="timeline-btn" onclick="switchWeek(32)"><span class="pill-week">Weeks 32–34</span> Presentation</button>
     </div>
 
-    <script>
-        // --- INTERACTIVE CHECKLISTS ---
-        function toggleCheckbox(element) {
-            element.classList.toggle('completed');
-            const icon = element.querySelector('.checklist-icon');
-            const checkmark = element.querySelector('svg');
-            
-            if (element.classList.contains('completed')) {
-                icon.classList.remove('border-slate-500', 'bg-slate-700');
-                icon.classList.add('border-transparent', 'bg-current');
-                checkmark.style.opacity = '1';
-            } else {
-                icon.classList.add('border-slate-500', 'bg-slate-700');
-                icon.classList.remove('border-transparent', 'bg-current');
-                checkmark.style.opacity = '0';
-            }
-        }
+    <!-- DYNAMIC CHECKPOINT DISPLAY -->
+    <div id="checkpointContainer"></div>
 
-        // --- SCROLL-BASED FADE-IN ANIMATIONS ---
-        const sections = document.querySelectorAll('.fade-in-section');
+    <p style="color:var(--slate-600);font-size:0.9rem">Ticks are saved automatically in this browser on this device. They do not send work to your teacher. Clearing browser data removes your saved ticks.</p>
+    <!-- ACTION & PROGRESS BAR -->
+    <div class="action-bar">
+      <div class="progress-track">
+        <span>Overall Progress:</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <span id="progressText">0%</span>
+      </div>
+      <div>
+        <button class="btn-secondary" onclick="window.print()">🖨️ Print This Step</button>
+        <button class="btn-secondary" onclick="resetChecklist()">🔄 Reset Progress</button>
+      </div>
+    </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
+<section class="spec-box" style="margin-top:40px"><h3>📊 How Your Project Is Assessed</h3><p>Use these criteria to check your work. Report: 50%; visual product: 25%; presentation: 25%.</p><details style="margin-top:18px"><summary style="cursor:pointer;font-weight:700">Report — 50%</summary><div class="table-scroll"><table><thead><tr><th>What is checked?</th><th>What to aim for</th></tr></thead><tbody><tr><td>Cover and contents</td><td>Show the project title, your name, and a clear list of sections.</td></tr><tr><td>Clear organisation</td><td>Include a short summary, introduction, clear headings, and conclusion. Put ideas in a sensible order.</td></tr><tr><td>Content and explanations</td><td>Explain the background, events, and effects. Support your ideas with evidence and useful pictures.</td></tr><tr><td>Language</td><td>Use clear B1+–early B2 English. Check grammar, vocabulary, and direct and reported speech.</td></tr><tr><td>Sources</td><td>Use reliable sources. Show where facts and quotations came from and include a complete, consistent source list.</td></tr></tbody></table></div></details><details style="margin-top:18px"><summary style="cursor:pointer;font-weight:700">Visual product — 25%</summary><div class="table-scroll"><table><thead><tr><th>What is checked?</th><th>What to aim for</th></tr></thead><tbody><tr><td>Connection to the topic</td><td>Make sure your sketch or poster, slides, or video supports the findings in your report.</td></tr><tr><td>Creativity and your own ideas</td><td>Make your own product. Choose a creative way to explain the rivalry.</td></tr><tr><td>Design and links to other subjects</td><td>Make the layout clear and readable. Use relevant ideas from history, sport, business, technology, or art.</td></tr><tr><td>Usefulness beyond the project</td><td>Help an audience understand what this rivalry teaches us about competition.</td></tr></tbody></table></div></details><details style="margin-top:18px"><summary style="cursor:pointer;font-weight:700">Presentation — 25%</summary><div class="table-scroll"><table><thead><tr><th>What is checked?</th><th>What to aim for</th></tr></thead><tbody><tr><td>Plan and conclusion</td><td>Introduce the topic, explain your findings in order, and finish with a clear conclusion.</td></tr><tr><td>Knowledge and detail</td><td>Show that you understand the rivalry. Explain important details and answer questions.</td></tr><tr><td>Communication with the audience</td><td>Speak clearly, look at your audience, and use short notes rather than reading everything.</td></tr><tr><td>Visuals and use of sources</td><td>Use clear, useful visuals to support your own ideas. Include sources for borrowed material.</td></tr><tr><td>Timing and language</td><td>Keep your talk within 5–10 minutes and use language the audience can follow.</td></tr></tbody></table></div></details></section>
+  </main>
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-        
-        // --- SCROLL PROGRESS BAR ---
-        const progressBar = document.getElementById('progressBar');
-        
-        function updateProgressBar() {
-            const { scrollTop, scrollHeight } = document.documentElement;
-            const scrollPercent = (scrollTop / (scrollHeight - window.innerHeight)) * 100 + '%';
-            progressBar.style.width = scrollPercent;
-        }
+  <script>
+    const checkpoints = [
+      {
+            "week": 5,
+            "title": "Choose Your Rivalry",
+            "meetingType": "Check 1 • Week 5",
+            "desc": "Choose one rivalry that interests you and has enough information to research.",
+            "target": "One chosen rivalry and three sentences explaining your choice.",
+            "questions": [
+                  "What is the difference between competition and rivalry?",
+                  "Why does this rivalry interest you?",
+                  "How could competition help people improve or cause problems?"
+            ],
+            "before": [
+                  "Read the project requirements and assessment guide.",
+                  "List 2–3 famous rivalries that interest you. Check that you can find information about both sides.",
+                  "Choose your favourite. Write three sentences explaining who the rivals are and why you want to study them."
+            ],
+            "during": [
+                  "Show your choice and reasons to your teacher.",
+                  "Discuss what you already know and what you need to find out.",
+                  "Agree on your topic and confirm the date of Check 2 in Week 7."
+            ],
+            "assignment": [
+                  "Research the background and begin collecting information on both rivals.",
+                  "Save the details of your sources. Aim to start with 3–4 reliable sources.",
+                  "Make brief notes on important events and possible positive and negative effects. Bring them to Check 2."
+            ]
+      },
+      {
+            "week": 7,
+            "title": "Check Your Research",
+            "meetingType": "Check 2 • Week 7",
+            "desc": "Check your sources and collect evidence about both sides.",
+            "target": "Research notes, a source list, and a short timeline of key events.",
+            "questions": [
+                  "Who created each source, and why can you trust it?",
+                  "What did each rival want to achieve?",
+                  "Which events help explain how the rivalry developed?"
+            ],
+            "before": [
+                  "Bring notes on who the rivals are, where and when they competed, and what they wanted to achieve.",
+                  "Bring your source list. Check the author, date, and original source of important claims.",
+                  "Make a timeline of key events. For each event, note what happened and why it matters."
+            ],
+            "during": [
+                  "Review your sources and check any unclear or one-sided claims.",
+                  "Discuss your timeline and choose events that show how the rivalry developed.",
+                  "Identify gaps in your research and confirm Check 3 in Week 11."
+            ],
+            "assignment": [
+                  "Find evidence of positive and negative effects on the rivals and their field.",
+                  "Find real statements about the rivalry, ideally from both sides. Save the exact words and source details.",
+                  "Prepare a report outline, a work schedule, and an idea for your visual product."
+            ]
+      },
+      {
+            "week": 11,
+            "title": "Plan Your Report and Visual Product",
+            "meetingType": "Check 3 • Week 11",
+            "desc": "Organise your evidence before writing the full report.",
+            "target": "A report outline, organised research notes, and a visual product plan.",
+            "questions": [
+                  "Does your outline include all the required sections?",
+                  "What evidence supports your points about benefits and problems?",
+                  "How will your visual product help the audience understand the rivalry?"
+            ],
+            "before": [
+                  "Bring an outline using the report plan above. Add notes and sources under each heading.",
+                  "Bring your timeline, evidence about effects, and checked quotations. Try reporting the quotations in your own sentences.",
+                  "Choose a sketch or poster, slides, or a video. Bring a rough layout and a schedule for finishing your work."
+            ],
+            "during": [
+                  "Check that your plan covers background, events, effects, and direct and reported speech.",
+                  "Review your evidence and quotation examples with your teacher.",
+                  "Agree on any research still needed and confirm Check 4 in Week 18."
+            ],
+            "assignment": [
+                  "Write the complete first draft, including your conclusion and source list.",
+                  "Explain why events matter and how competition affected both sides. Include direct and reported speech.",
+                  "Start your visual product. Mark 2–3 parts of your draft where you want feedback."
+            ]
+      },
+      {
+            "week": 18,
+            "title": "Share Your First Draft",
+            "meetingType": "Check 4 • Week 18",
+            "desc": "Get feedback on your full report and early visual product.",
+            "target": "A complete first draft and a clear list of changes to make.",
+            "questions": [
+                  "Have you explained both benefits and problems using evidence?",
+                  "Are quotations accurate and reported speech clear?",
+                  "Does your conclusion answer what we can learn from the rivalry?"
+            ],
+            "before": [
+                  "Bring your complete first draft and source list.",
+                  "Check that both rivals are represented fairly and that each important claim has a source.",
+                  "Bring your early visual product and mark 2–3 sections where you want help."
+            ],
+            "during": [
+                  "Discuss your marked sections with your teacher.",
+                  "Check the report structure, explanations, sources, and direct and reported speech.",
+                  "Write a list of changes and confirm Check 5 in Week 23."
+            ],
+            "assignment": [
+                  "Improve your report using the feedback list.",
+                  "Develop your visual product. Add a clear timeline, useful images, and source details.",
+                  "Plan your 5–10 minute talk. Bring your second draft and visual product sample to Check 5."
+            ]
+      },
+      {
+            "week": 23,
+            "title": "Improve Your Draft and Plan Your Talk",
+            "meetingType": "Check 5 • Week 23",
+            "desc": "Review your changes and prepare the final report, product, and talk.",
+            "target": "An improved report, a visual product sample, and a presentation outline.",
+            "questions": [
+                  "What did you improve after feedback?",
+                  "Do your visuals support your findings?",
+                  "How will you explain your ideas without reading whole paragraphs?"
+            ],
+            "before": [
+                  "Bring your second draft. Mark the changes you made after Check 4.",
+                  "Bring your partly finished sketch or poster, slides, or video.",
+                  "Prepare a talk outline: introduce the rivalry, explain key events and effects, discuss statements, and share your conclusion."
+            ],
+            "during": [
+                  "Review your changes and identify anything still missing.",
+                  "Check that the visual product is clear and matches your report.",
+                  "Confirm the final hand-in on 30 April (Week 29) and your presentation date in Weeks 32–34. Agree on any equipment you need."
+            ],
+            "assignment": [
+                  "Finish and proofread the report, including the cover, contents, and source list.",
+                  "Finish your visual product and check every image, quotation, file, and link.",
+                  "Prepare both the report and product for 30 April (Week 29)."
+            ]
+      },
+      {
+            "week": 29,
+            "title": "Hand In Your Report and Visual Product",
+            "meetingType": "Final Hand-in • Week 29 • 30 April",
+            "desc": "Submit your finished report and visual product on 30 April (Week 29).",
+            "target": "A finished report and visual product, with a confirmed presentation date.",
+            "questions": [
+                  "Are all report sections complete and easy to follow?",
+                  "Have you checked the facts, quotations, and source details?",
+                  "Do your visuals explain the rivalry clearly?"
+            ],
+            "before": [
+                  "Check your report has a title, your name, all required sections, and a complete source list.",
+                  "Check your visual product is finished. Test any files, video, or links.",
+                  "Save backup copies of your report and digital materials."
+            ],
+            "during": [
+                  "Hand in the report and visual product in the format agreed with your teacher.",
+                  "Confirm your presentation date in Weeks 32–34 and the equipment you need.",
+                  "Agree on when to share slides or video before your talk."
+            ],
+            "assignment": [
+                  "Practise your talk with a timer. Aim for 5–10 minutes.",
+                  "Use short notes. Prepare to explain your evidence and respond to different views.",
+                  "Share slides or video by the agreed date and bring a backup."
+            ]
+      },
+      {
+            "week": 32,
+            "title": "Present Your Case Study",
+            "meetingType": "Presentation • Weeks 32–34",
+            "desc": "Share your findings and explain what this rivalry teaches us about competition.",
+            "target": "A clear 5–10 minute presentation and answers to audience questions.",
+            "questions": [
+                  "Can you explain the rivalry and its main effects in your own words?",
+                  "Can you support your conclusion with evidence?",
+                  "Can you answer questions about both sides of the rivalry?"
+            ],
+            "before": [
+                  "Practise with short notes instead of reading your full report.",
+                  "Check your sketch or poster, slides, or video. Bring backup copies.",
+                  "Time your talk and prepare answers to the guiding questions."
+            ],
+            "during": [
+                  "Introduce the rivals and explain the background and key events.",
+                  "Explain positive and negative effects. Include statements in direct and reported speech.",
+                  "Finish with what we can learn from this rivalry and answer questions."
+            ],
+            "assignment": [
+                  "Write a short reflection: what went well, what was difficult, and one thing you would improve.",
+                  "Read or discuss your feedback. Choose one goal for your next project."
+            ]
+      }
+];
 
-        document.addEventListener('scroll', updateProgressBar);
-    </script>
+    let currentWeek = 5;
+
+    function renderCheckpoint(weekNum) {
+      const data = checkpoints.find(c => c.week === weekNum);
+      if (!data) return;
+
+      const container = document.getElementById("checkpointContainer");
+      container.innerHTML = `
+        <div class="checkpoint-card">
+          <div class="checkpoint-header">
+            <div class="checkpoint-title-grp">
+              <h2>
+                <span>${data.title}</span>
+                <span class="meeting-badge">${data.meetingType}</span>
+              </h2>
+              <p>${data.desc}</p>
+              <p><strong>Target for this step:</strong> ${data.target}</p>
+            </div>
+          </div>
+
+          <div class="questions-box">
+            <h4>🎯 Questions to Help You</h4>
+            <ul>
+              ${data.questions.map(q => `<li>${q}</li>`).join("")}
+            </ul>
+          </div>
+
+          <div class="workflow-grid">
+            <!-- BEFORE -->
+            <div class="action-col col-before">
+              <div class="col-title">
+                <span>🎒 Get Ready</span>
+                <small>Bring or prepare</small>
+              </div>
+              <ul class="action-list">
+                ${data.before.map((task, idx) => `
+                  <li class="action-item">
+                    <input type="checkbox" id="chk_${data.week}_b_${idx}" onchange="saveProgress()" />
+                    <label for="chk_${data.week}_b_${idx}">${task}</label>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+
+            <!-- DURING -->
+            <div class="action-col col-during">
+              <div class="col-title">
+                <span>🤝 At This Step</span>
+                <small>Check together</small>
+              </div>
+              <ul class="action-list">
+                ${data.during.map((task, idx) => `
+                  <li class="action-item">
+                    <input type="checkbox" id="chk_${data.week}_d_${idx}" onchange="saveProgress()" />
+                    <label for="chk_${data.week}_d_${idx}">${task}</label>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+
+            <!-- ASSIGNMENT -->
+            <div class="action-col col-next">
+              <div class="col-title">
+                <span>📝 Finish Next</span>
+                <small>Next target</small>
+              </div>
+              <ul class="action-list">
+                ${data.assignment.map((task, idx) => `
+                  <li class="action-item">
+                    <input type="checkbox" id="chk_${data.week}_a_${idx}" onchange="saveProgress()" />
+                    <label for="chk_${data.week}_a_${idx}">${task}</label>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+
+      loadProgress();
+      updateProgressBar();
+    }
+
+    function switchWeek(weekNum) {
+      currentWeek = weekNum;
+      document.querySelectorAll(".timeline-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("onclick").includes(weekNum));
+      });
+      renderCheckpoint(weekNum);
+    }
+
+    function readProgress() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("rivalries_progress_v2") || "{}");
+        return saved && typeof saved === "object" && !Array.isArray(saved) ? saved : {};
+      } catch (_) { return {}; }
+    }
+
+    function saveProgress() {
+      const state = readProgress();
+      document.querySelectorAll("input[type='checkbox']").forEach(box => {
+        state[box.id] = box.checked;
+      });
+      try { localStorage.setItem("rivalries_progress_v2", JSON.stringify(state)); } catch (_) {}
+      updateProgressBar();
+    }
+
+    function loadProgress() {
+      const saved = readProgress();
+      document.querySelectorAll("input[type='checkbox']").forEach(box => {
+        box.checked = saved[box.id] === true;
+      });
+    }
+
+    function updateProgressBar() {
+      const saved = readProgress();
+      let totalTasks = 0;
+      checkpoints.forEach(cp => {
+        totalTasks += cp.before.length + cp.during.length + cp.assignment.length;
+      });
+
+      const checkedCount = checkpoints.reduce((count, cp) => count +
+        [['b', cp.before], ['d', cp.during], ['a', cp.assignment]].reduce((sum, [key, tasks]) =>
+          sum + tasks.filter((_, idx) => saved[`chk_${cp.week}_${key}_${idx}`] === true).length, 0), 0);
+      const percentage = Math.min(100, Math.round((checkedCount / totalTasks) * 100));
+
+      const fill = document.getElementById("progressFill");
+      const text = document.getElementById("progressText");
+      if (fill && text) {
+        fill.style.width = percentage + "%";
+        text.innerText = percentage + "% completed";
+      }
+    }
+
+    function resetChecklist() {
+      if (confirm("Reset all ticks in every step?")) {
+        try { localStorage.removeItem("rivalries_progress_v2"); } catch (_) {}
+        loadProgress();
+        updateProgressBar();
+      }
+    }
+
+    // Initial render
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCheckpoint(5);
+    });
+  </script>
 </body>
 </html>
-
 
